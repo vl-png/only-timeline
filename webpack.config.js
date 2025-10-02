@@ -26,29 +26,55 @@ module.exports = (env, argv) => {
         {
           test: /\.module\.s[ac]ss$/,
           use: [
-            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+            isDev
+              ? { loader: 'style-loader', options: { esModule: true } }
+              : { loader: MiniCssExtractPlugin.loader, options: { esModule: true } },
             {
               loader: 'css-loader',
               options: {
-                modules: { localIdentName: isDev ? '[local]_[hash:base64:5]' : '[hash:base64:7]' },
+                esModule: true,
+                modules: { namedExport: false, localIdentName: isDev ? '[local]_[hash:base64:5]' : '[hash:base64:7]' },
                 importLoaders: 2
               }
             },
             'postcss-loader',
-            'sass-loader'
+            {
+              loader: 'sass-loader',
+              options: {
+                additionalData: '@use "mixins" as *;\n',
+                sassOptions: { loadPaths: [path.resolve(__dirname, 'src', 'styles')] }
+              }
+            }
           ]
         },
         {
           test: /\.s[ac]ss$/,
           exclude: /\.module\.s[ac]ss$/,
           use: [
-            isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+            isDev
+              ? { loader: 'style-loader', options: { esModule: true } }
+              : { loader: MiniCssExtractPlugin.loader, options: { esModule: true } },
             { loader: 'css-loader', options: { importLoaders: 2 } },
             'postcss-loader',
-            'sass-loader'
+            {
+              loader: 'sass-loader',
+              options: {
+                additionalData: '@use "mixins" as *;\n',
+                sassOptions: { loadPaths: [path.resolve(__dirname, 'src', 'styles')] }
+              }
+            }
           ]
         },
-        { test: /\.css$/, use: [isDev ? 'style-loader' : MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'] },
+        {
+          test: /\.css$/,
+          use: [
+            isDev
+              ? { loader: 'style-loader', options: { esModule: true } }
+              : { loader: MiniCssExtractPlugin.loader, options: { esModule: true } },
+            'css-loader',
+            'postcss-loader'
+          ]
+        },
         { test: /\.(png|jpe?g|gif|svg|webp|ico)$/i, type: 'asset/resource' },
         { test: /\.(woff2?|eot|ttf|otf)$/i, type: 'asset/resource' }
       ]

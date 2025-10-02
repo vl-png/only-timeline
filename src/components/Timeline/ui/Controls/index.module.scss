@@ -1,0 +1,64 @@
+@use "../../../../styles/mixins.scss" as *;
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 56px;
+  position: absolute;
+  transform: translateY(-100%);
+  z-index: 2;
+  
+  @include tablet {
+    gap: 11px;
+    transform: translateY(0%);
+    bottom: 0px;
+    padding-bottom: 14px;
+    left: 0;
+    right: max(20px, 6%);
+  }
+}
+
+.counter {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--black-blue);
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+  
+  @include tablet {
+    gap: 8px;
+  }
+}
+
+.pagination {
+  display: none;
+  list-style: none;
+  gap: 10px;
+  align-items: center;
+  
+  @include tablet {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 30px;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: var(--black-blue-transparent);
+}
+
+.dot.active {
+  background: var(--black-blue);
+}

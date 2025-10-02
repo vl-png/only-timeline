@@ -1,0 +1,96 @@
+@use '../../../../styles/mixins.scss';
+
+.dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+  transform-origin: 50% 50%;
+  transform: translate(-50%, -50%) rotate(var(--angle, 0deg)) translate(var(--r)) rotate(calc(-1 * var(--angle, 0deg)));
+}
+
+.dot:hover .dotInner {
+  transform: scale(1.05);
+}
+
+.point {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: block;
+  margin: 25px;
+  background: var(--black-blue);
+}
+
+.badge {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--border-ring);
+  background: var(--background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform .2s ease, opacity .15s ease, visibility .15s ease;
+  z-index: 2;
+}
+
+.badgeLabel {
+  color: var(--black-blue);
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+  transform: rotate(calc(-1 * var(--ring-rotation, 0deg)));
+}
+
+.badgeLabel::after  {
+  content: attr(data-label);
+  position: absolute;
+  color: var(--black-blue);
+  font-size: 20px;
+  font-weight: 700;
+  left: 52px;
+  opacity: 0;
+  cursor: default;
+  transition: opacity 0.5s;
+  transition-delay: 0.6s;
+}
+
+.dot:hover { z-index: 2; }
+.dot:hover .badge,
+.dotActive .badge {
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.dotActive .badgeLabel::after {
+  opacity: 1;
+}
+
+.dotActive {
+  z-index: 1;
+}
+
+.dotActive .dotInner {
+  width: 56px;
+  height: 56px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 400;
+}

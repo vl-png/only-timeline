@@ -1,0 +1,39 @@
+@use '../../../../styles/mixins.scss';
+
+.bigYears {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 90px;
+  pointer-events: none;
+  justify-content: center;
+  z-index: 1;
+  
+  @include tablet {
+    gap: max(20px, 5vw);
+  }
+}
+
+.yearLeft {
+  color: var(--iris);
+  font-weight: 700;
+  font-size: 200px;
+  line-height: 160px;
+  letter-spacing: -0.02em;
+}
+
+.yearRight {
+  color: var(--fuschia);
+  font-weight: 700;
+  font-size: 200px;
+  line-height: 160px;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 1023px) {
+  .yearLeft,
+  .yearRight {
+    font-size: clamp(56px, 18vw, 200px);
+    line-height: 1;
+  }
+}

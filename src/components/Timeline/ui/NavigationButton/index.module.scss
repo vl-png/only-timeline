@@ -1,0 +1,33 @@
+@use "../../../../styles/mixins.scss" as *;
+
+.navBtn {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 1px solid var(--border-ring);
+  background: transparent;
+  color: var(--black-blue);
+  cursor: pointer;
+  transition: all 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  @include tablet {
+    width: 25px;
+    height: 25px;
+    svg {
+      width: 6px;
+      height: 9px;
+    }
+  }
+}
+
+.navBtn:hover:not(:disabled) {
+  background-color: var(--white);
+}
+
+.navBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

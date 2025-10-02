@@ -1,9 +1,13 @@
-import React from 'react';
+import { Timeline } from './components/Timeline';
+import { demoSegments } from './components/Timeline/model/mocks';
+import styles from './index.module.scss';
 
-export default function App() {
+const App = () => {
   return (
-    <main>
-      <h1>Only Timeline</h1>
+    <main className={styles.container}>
+      <Timeline segments={demoSegments} />
     </main>
   );
-}
+};
+
+export default App;

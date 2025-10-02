@@ -1,0 +1,30 @@
+@use "../../../../styles/mixins.scss" as *;
+
+.header {
+  display: flex;
+  gap: 75px;
+  align-items: center;
+}
+
+.accent {
+  width: 5px;
+  height: 120px;
+  background: var(--gradient);
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.title {
+  font-family: var(--font-family-main);
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 120%;
+  color: var(--black-blue);
+
+  @include tablet {
+    font-size: clamp(20px, 6vw, 56px);
+    margin: 0 max(20px, 6vw);
+  }
+}
